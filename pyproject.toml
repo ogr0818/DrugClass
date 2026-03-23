@@ -1,0 +1,13 @@
+[project]
+name = "drugclass"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "altair>=5.0.0",
+    "pandas>=2.2.0",
+    "streamlit>=1.31.0",
+    "thefuzz>=0.22.1",
+    "xlrd>=2.0.2",
+]
