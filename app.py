@@ -8,6 +8,16 @@ import difflib
 st.set_page_config(page_title="藥品適應症查詢", page_icon="💊", layout="wide")
 df = pd.read_csv('./data.csv')
 st.title('同類及同成份藥物查詢')
+st.markdown("""
+<style>
+[data-testid="stTextInput"] label p{
+    font-size: 22px !important;
+}
+[data-testid="stTextInput"] input {
+    font-size: 20px !important;
+}
+</style>
+""", unsafe_allow_html=True)
 col = ["藥品代碼", "商品名稱", '藥品學名', '藥品中文名', 'DC藥預設替代藥', '衛署適應症']
 tab1, tab2, tab3 = st.tabs(["商品名稱檢索", "藥品代碼檢索", "疾病中文名檢索"])
 with tab1:
@@ -62,14 +72,14 @@ with tab3:
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
         direct_match = df["衛署適應症"].str.contains(disease, na=False, regex=False)
         result = df[direct_match]
-        st.subheader('全吻合：')
+        st.markdown('# 全吻合：<span style="color:red; font-size:22px">確認內容為適應症或禁忌</span>', unsafe_allow_html=True)
         st.write(result[col])
         # 若直接搜尋沒有結果，再做模糊比對
         if result.empty:
             df["相似度分數"] = df["衛署適應症"].apply(lambda x: fuzz.partial_ratio(disease, x))
             result = df[df["相似度分數"] >= 70]
             resultQ = result.sort_values("相似度分數", ascending=False)
-            st.subheader('相似度排序：')
+            st.markdown('# 相似度排序：<span style="color:red; font-size:22px">確認內容為適應症或禁忌</span>', unsafe_allow_html=True)
             st.write(resultQ[col])
         # else:
         #     resultQ = "無匹配適應症"
