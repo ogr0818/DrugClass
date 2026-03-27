@@ -69,7 +69,7 @@ with tab2:
 with tab3:
     try:
         st.subheader("疾病中文名檢索")
-        disease = st.text_input("請輸入中文疾病名稱： :blue (使用*表示不確定性詞語，如：甲狀腺*)", value='', max_chars=10)
+        disease = st.text_input(fr"請輸入中文疾病名稱： :blue[(使用\*表示不確定性詞語，如：甲狀腺\*)]", value='早產', max_chars=10)
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
         direct_match = df["衛署適應症"].str.contains(disease, na=False, regex=False)
         result = df[direct_match]
