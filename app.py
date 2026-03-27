@@ -44,7 +44,7 @@ with tab1:
         st.subheader('同成份藥物：')
         st.write(trade_ing[col])
         trade_class = df[df['ATC_CODE1'].str.startswith(class_trade)]
-        st.subheader('同類藥物：')
+        st.subheader(':blue[同類藥物：]')
         st.write(trade_class[col])
     except:
         st.write('無符合條件藥物')
@@ -60,7 +60,7 @@ with tab2:
         code_ing = df[df['ATC_CODE1'].str.startswith(ingredient_)]
         st.write(code_ing[col])
         
-        st.subheader('同類藥物：')
+        st.subheader(':blue[同類藥物：]')
         code_class = df[df['ATC_CODE1'].str.startswith(class_)]
         st.write(code_class[col])
     except:
@@ -69,7 +69,7 @@ with tab2:
 with tab3:
     try:
         st.subheader("疾病中文名檢索")
-        disease = st.text_input(fr"請輸入中文疾病名稱： **:blue[(若有不確定性語詞，可用\*表之，如：甲狀腺\*)]**", value='早產', max_chars=10)
+        disease = st.text_input(fr"請輸入中文疾病名稱： **:blue[(若有不確定性語詞，可用\*表之增加機率   ，如：甲狀腺\*)]**", value='早產', max_chars=10)
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
         direct_match = df["衛署適應症"].str.contains(disease, na=False, regex=False)
         result = df[direct_match]
