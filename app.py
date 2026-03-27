@@ -63,7 +63,7 @@ with tab1:
 with tab2:
     try:
         st.subheader(f"藥品代碼檢索 :red[(依ATC分類)]")
-        drug_code = st.text_input("請輸入完整藥品代碼：", value='rix01o', max_chars=6).upper()
+        drug_code = st.text_input("請輸入完整藥品代碼：", value='flu03o', max_chars=6).upper()
         st.divider()
         choice_ = df.query('藥品代碼 == @drug_code')
         class_= choice_['ATC_CODE1'].str[:5].iloc[0]
