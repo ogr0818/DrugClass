@@ -8,6 +8,7 @@ import difflib
 st.set_page_config(page_title="藥品適應症查詢", page_icon="💊", layout="wide")
 df = pd.read_csv('./data.csv')
 st.title('同類及同成份藥物查詢')
+st.markdown(f'<h3 style="color: blue;">資料更新日期：March 2026</h3>')
 st.markdown("""
 <style>
 [data-testid="stTextInput"] label p{
