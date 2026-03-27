@@ -32,7 +32,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 with tab1:
-    st.subheader("商品名稱檢索(依ATC分類)")
+    st.subheader(f"商品名稱檢索 :red[(依ATC分類)]")
     trade = set()
     for i in df['商品名稱'].unique():
         j = i.split(' ')[0].upper()
@@ -62,7 +62,7 @@ with tab1:
 
 with tab2:
     try:
-        st.subheader("藥品代碼檢索(依ATC分類)")
+        st.subheader(f"藥品代碼檢索 :red[(依ATC分類)]")
         drug_code = st.text_input("請輸入藥品代碼：", value='rix01o', max_chars=6).upper()
         st.divider()
         choice_ = df.query('藥品代碼 == @drug_code')
