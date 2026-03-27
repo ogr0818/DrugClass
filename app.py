@@ -21,6 +21,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 col = ["藥品代碼", "商品名稱", '藥品學名', '藥品中文名', 'DC藥預設替代藥', '衛署適應症']
 tab1, tab2, tab3 = st.tabs(["商品名稱檢索", "藥品代碼檢索", "疾病中文名檢索"])
+st.markdown("""
+    <style>
+    button[data-baseweb="tab"] p {
+        font-size: 20px !important;
+        color: #1E90FF !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 with tab1:
     st.subheader("商品名稱檢索")
     trade = set()
