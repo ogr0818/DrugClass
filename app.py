@@ -91,7 +91,7 @@ with tab3:
         # 若直接搜尋沒有結果，再做模糊比對
         if result.empty:
             df["相似度分數"] = df["衛署適應症"].apply(lambda x: fuzz.partial_ratio(disease, x))
-            result = df[df["相似度分數"] >= 70]
+            result = df[df["相似度分數"] >= 60]
             resultQ = result.sort_values("相似度分數", ascending=False)
             st.markdown('# 近似比對：<span style="color:red; font-size:22px">請確認適應症或禁忌</span>', unsafe_allow_html=True)
             st.write(resultQ[col])
