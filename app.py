@@ -58,7 +58,7 @@ with tab1:
         class_trade = choice_trade['ATC_CODE1'][:5]
         ingredient_trade = choice_trade['ATC_CODE1']
         trade_ing = df[df['ATC_CODE1'].str.startswith(ingredient_trade)]
-        st.subheader(':navy[同成份藥物：]')
+        st.subheader('同成份藥物：')
         st.write(trade_ing[col])
         trade_class = df[df['ATC_CODE1'].str.startswith(class_trade)]
         st.subheader(':blue[同類藥物：]')
@@ -74,7 +74,7 @@ with tab2:
         choice_ = df.query('藥品代碼 == @drug_code')
         class_= choice_['ATC_CODE1'].str[:5].iloc[0]
         ingredient_ = choice_['ATC_CODE1'].iloc[0]
-        st.subheader(':navy[同成份藥物：]')
+        st.subheader('同成份藥物：')
         code_ing = df[df['ATC_CODE1'].str.startswith(ingredient_)]
         st.write(code_ing[col])
         
