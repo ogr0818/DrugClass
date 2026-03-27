@@ -32,13 +32,13 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 with tab1:
-    st.subheader(f"商品名稱檢索 :red[(依ATC分類)]")
+    st.subheader(f"商品名檢索 :red[(依ATC分類)]")
     trade = set()
     for i in df['商品名稱'].unique():
         j = i.split(' ')[0].upper()
         trade.add(j)
 
-    drug = st.text_input("請輸入檢索藥名：", value='rix', max_chars=25).upper()
+    drug = st.text_input("請輸入檢索藥名(採字首模糊搜尋)：", value='rix', max_chars=25).upper()
     st.divider()
     try:
         # best_match = process.extractOne(drug, trade)[0]
@@ -63,7 +63,7 @@ with tab1:
 with tab2:
     try:
         st.subheader(f"藥品代碼檢索 :red[(依ATC分類)]")
-        drug_code = st.text_input("請輸入藥品代碼：", value='rix01o', max_chars=6).upper()
+        drug_code = st.text_input("請輸入完整藥品代碼：", value='rix01o', max_chars=6).upper()
         st.divider()
         choice_ = df.query('藥品代碼 == @drug_code')
         class_= choice_['ATC_CODE1'].str[:5].iloc[0]
@@ -81,19 +81,19 @@ with tab2:
 with tab3:
     try:
         st.subheader(f"適應症檢索 :red[(採模糊比對)]")
-        disease = st.text_input(fr"請輸入適應症： **:blue[(若有不確定性語詞，可用\*表之增加機率，如：甲狀腺\*)]**", value='早產', max_chars=10)
+        disease = st.text_input(fr"請輸入適應症： **:blue[(若有不確定性語詞，可以\*表之增加比對機率，如：甲狀腺\*)]**", value='早產', max_chars=10)
         st.divider()
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
         direct_match = df["衛署適應症"].str.contains(disease, na=False, regex=False)
         result = df[direct_match]
-        st.markdown('# 全吻合：<span style="color:red; font-size:22px">請確認適應症或禁忌</span>', unsafe_allow_html=True)
+        st.markdown('# 全詞比對：<span style="color:red; font-size:22px">請確認適應症或禁忌</span>', unsafe_allow_html=True)
         st.write(result[col])   
         # 若直接搜尋沒有結果，再做模糊比對
         if result.empty:
             df["相似度分數"] = df["衛署適應症"].apply(lambda x: fuzz.partial_ratio(disease, x))
             result = df[df["相似度分數"] >= 70]
             resultQ = result.sort_values("相似度分數", ascending=False)
-            st.markdown('# 相似度排序：<span style="color:red; font-size:22px">請確認適應症或禁忌</span>', unsafe_allow_html=True)
+            st.markdown('# 近似比對：<span style="color:red; font-size:22px">請確認適應症或禁忌</span>', unsafe_allow_html=True)
             st.write(resultQ[col])
         # else:
         #     resultQ = "無匹配適應症"
