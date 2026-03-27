@@ -7,7 +7,14 @@ import difflib
 
 st.set_page_config(page_title="藥品適應症查詢", page_icon="💊", layout="wide")
 df = pd.read_csv('./data.csv')
-st.title('同類及同成份藥物查詢')
+st.markdown("""
+    <style>
+    .stTitle {
+        text-align: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+st.title('同類、同成份藥物查詢')
 st.markdown(f'<h style="color: blue;">資料更新日期：March 2026</h4>', unsafe_allow_html=True)
 st.markdown("""
 <style>
@@ -51,7 +58,7 @@ with tab1:
         class_trade = choice_trade['ATC_CODE1'][:5]
         ingredient_trade = choice_trade['ATC_CODE1']
         trade_ing = df[df['ATC_CODE1'].str.startswith(ingredient_trade)]
-        st.subheader('同成份藥物：')
+        st.subheader(':navy[同成份藥物：]')
         st.write(trade_ing[col])
         trade_class = df[df['ATC_CODE1'].str.startswith(class_trade)]
         st.subheader(':blue[同類藥物：]')
@@ -67,7 +74,7 @@ with tab2:
         choice_ = df.query('藥品代碼 == @drug_code')
         class_= choice_['ATC_CODE1'].str[:5].iloc[0]
         ingredient_ = choice_['ATC_CODE1'].iloc[0]
-        st.subheader('同成份藥物：')
+        st.subheader(':navy[同成份藥物：]')
         code_ing = df[df['ATC_CODE1'].str.startswith(ingredient_)]
         st.write(code_ing[col])
         
@@ -79,8 +86,8 @@ with tab2:
 
 with tab3:
     try:
-        st.subheader("中文疾病檢索")
-        disease = st.text_input(fr"請輸入中文疾病名稱： **:blue[(若有不確定性語詞，可用\*表之增加機率   ，如：甲狀腺\*)]**", value='早產', max_chars=10)
+        st.subheader("適應症檢索")
+        disease = st.text_input(fr"請輸入適應症： **:blue[(若有不確定性語詞，可用\*表之增加機率，如：甲狀腺\*)]**", value='早產', max_chars=10)
         st.divider()
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
         direct_match = df["衛署適應症"].str.contains(disease, na=False, regex=False)
