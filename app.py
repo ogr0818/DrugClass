@@ -69,12 +69,12 @@ with tab2:
 with tab3:
     try:
         st.subheader("疾病中文名檢索")
-        disease = st.text_input(fr"請輸入中文疾病名稱： :blue[(使用\*表示不確定性詞語，如：甲狀腺\*)]", value='早產', max_chars=10)
+        disease = st.text_input(fr"請輸入中文疾病名稱： **:blue[(若有不確定性語詞，可用\*表之，如：甲狀腺\*)]**", value='早產', max_chars=10)
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
         direct_match = df["衛署適應症"].str.contains(disease, na=False, regex=False)
         result = df[direct_match]
         st.markdown('# 全吻合：<span style="color:red; font-size:22px">請確認適應症或禁忌</span>', unsafe_allow_html=True)
-        st.write(result[col])
+        st.write(result[col])   
         # 若直接搜尋沒有結果，再做模糊比對
         if result.empty:
             df["相似度分數"] = df["衛署適應症"].apply(lambda x: fuzz.partial_ratio(disease, x))
