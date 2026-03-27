@@ -80,7 +80,7 @@ with tab2:
 
 with tab3:
     try:
-        st.subheader("適應症檢索(採模糊比對)")
+        st.subheader(f"適應症檢索 :red[(採模糊比對)]")
         disease = st.text_input(fr"請輸入適應症： **:blue[(若有不確定性語詞，可用\*表之增加機率，如：甲狀腺\*)]**", value='早產', max_chars=10)
         st.divider()
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
