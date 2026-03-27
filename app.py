@@ -32,13 +32,13 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 with tab1:
-    st.subheader("商品名稱檢索")
+    st.subheader("商品名稱檢索(依ATC分類)")
     trade = set()
     for i in df['商品名稱'].unique():
         j = i.split(' ')[0].upper()
         trade.add(j)
 
-    drug = st.text_input("請輸入檢索藥名：", value='asp', max_chars=25).upper()
+    drug = st.text_input("請輸入檢索藥名：", value='rix', max_chars=25).upper()
     st.divider()
     try:
         # best_match = process.extractOne(drug, trade)[0]
@@ -62,8 +62,8 @@ with tab1:
 
 with tab2:
     try:
-        st.subheader("藥品代碼檢索")
-        drug_code = st.text_input("請輸入藥品代碼：", value='flu11i', max_chars=6).upper()
+        st.subheader("藥品代碼檢索(依ATC分類)")
+        drug_code = st.text_input("請輸入藥品代碼：", value='rix01o', max_chars=6).upper()
         st.divider()
         choice_ = df.query('藥品代碼 == @drug_code')
         class_= choice_['ATC_CODE1'].str[:5].iloc[0]
@@ -80,7 +80,7 @@ with tab2:
 
 with tab3:
     try:
-        st.subheader("適應症檢索")
+        st.subheader("適應症檢索(採模糊比對)")
         disease = st.text_input(fr"請輸入適應症： **:blue[(若有不確定性語詞，可用\*表之增加機率，如：甲狀腺\*)]**", value='早產', max_chars=10)
         st.divider()
         df["衛署適應症"] = df["衛署適應症"].fillna("").astype(str)# 先做直接關鍵字搜尋
