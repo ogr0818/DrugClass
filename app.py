@@ -9,7 +9,7 @@ st.set_page_config(page_title="藥品適應症查詢", page_icon="💊", layout=
 df = pd.read_csv('./data.csv')
 st.markdown("<h1 style='text-align: center;color:#000080;'>同類、同成份藥物查詢</h1>", unsafe_allow_html=True)
 
-st.markdown(f'<h style="color: blue;">資料更新日期：March 2026</h4>', unsafe_allow_html=True)
+st.markdown(f'<h style="color: blue;">資料更新日期：September 2026</h4>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 [data-testid="stTextInput"] label p{
