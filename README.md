@@ -1,3 +1,8 @@
+# data source
+## .venv/base.xls
+## datatocsv.py => data.csv
+## 移至 app.py 目錄下
+
 # 功能：
 ## 分頁一：商品名檢索(依ATC分類)
 ## 分頁二：藥品代碼檢索(依ATC分類)
